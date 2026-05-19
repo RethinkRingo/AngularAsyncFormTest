@@ -1,0 +1,49 @@
+<main>
+  <h1>Simple Form</h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <label for="address">Address</label>
+    <input id="address" name="address" type="text" formControlName="address" />
+    @if (hasError('address', 'required')) {
+      <p>Address is required.</p>
+    }
+    @if (hasError('address', 'minlength')) {
+      <p>Address must be at least 5 characters.</p>
+    }
+    @if (hasError('address', 'addressNotConfirmed')) {
+      <p>Please confirm your address.</p>
+    }
+    @if (form.get('address')?.pending) {
+      <p>Checking address...</p>
+    }
+
+    <label for="firstName">First Name</label>
+    <input id="firstName" name="firstName" type="text" formControlName="firstName" />
+    @if (hasError('firstName', 'required')) {
+      <p>First name is required.</p>
+    }
+    @if (hasError('firstName', 'minlength')) {
+      <p>First name must be at least 2 characters.</p>
+    }
+
+    <label for="lastName">Last Name</label>
+    <input id="lastName" name="lastName" type="text" formControlName="lastName" />
+    @if (hasError('lastName', 'required')) {
+      <p>Last name is required.</p>
+    }
+    @if (hasError('lastName', 'minlength')) {
+      <p>Last name must be at least 2 characters.</p>
+    }
+
+    <label for="age">Age</label>
+    <input id="age" name="age" type="number" min="0" max="120" formControlName="age" />
+    @if (hasError('age', 'required')) {
+      <p>Age is required.</p>
+    }
+    @if (hasError('age', 'min') || hasError('age', 'max')) {
+      <p>Age must be between 0 and 120.</p>
+    }
+
+    <button type="submit">Submit</button>
+  </form>
+</main>
